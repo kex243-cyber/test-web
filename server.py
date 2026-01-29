@@ -7,18 +7,19 @@ from typing import Dict, List
 from data_validator import validate_level_data
 from setup_validator import validate_player_setup
 
-
 app = FastAPI()
 
-# --- ДОБАВЬТЕ ЭТОТ БЛОК ---
-@app.get("/")
-async def health_check():
-    return "Server is running"
 # --- CONFIGURATION ---
 TARGET_APP_ID = 480  
 STEAM_WEB_API_KEY = "6AB9786E0AD6BCFF371672A8A8586A26" 
 USE_STEAM_VERIFICATION = False 
 # ---------------------
+
+# --- RAILWAY HEALTH CHECK ---
+@app.get("/")
+async def health_check():
+    return {"status": "ok", "message": "Gear Ratio Server is running"}
+# ----------------------------
 
 class Room:
     def __init__(self, room_id, host_id):
@@ -608,3 +609,4 @@ if __name__ == "__main__":
     print("Please ensure you have stopped any previous server instances.")
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
+

@@ -10,6 +10,10 @@ from setup_validator import validate_player_setup
 
 app = FastAPI()
 
+# --- ДОБАВЬТЕ ЭТОТ БЛОК ---
+@app.get("/")
+async def health_check():
+    return "Server is running"
 # --- CONFIGURATION ---
 TARGET_APP_ID = 480  
 STEAM_WEB_API_KEY = "6AB9786E0AD6BCFF371672A8A8586A26" 
@@ -602,4 +606,5 @@ async def websocket_endpoint(websocket: WebSocket):
 if __name__ == "__main__":
     print("--- SERVER V2 STARTING (ROOMS ENABLED) ---")
     print("Please ensure you have stopped any previous server instances.")
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
